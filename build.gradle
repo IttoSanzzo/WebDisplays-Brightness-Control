@@ -5,11 +5,11 @@ plugins {
 	id 'net.minecraftforge.gradle' version '[6.0,6.2)'
 }
 
-version = mod_version
-group = mod_group_id
+version = "${mod_version}"
+group = "${mod_group}.${mod_id}"
 
 base {
-	archivesName = mod_id
+	archivesName = "${mod_id}"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -34,6 +34,10 @@ minecraft {
 		}
 
 		client {
+			property 'minecraft.username', System.getenv('CLIENT_USER') ?: project.findProperty('client_user') ?: '_MISSING_'
+			property 'minecraft.uuid', System.getenv('CLIENT_UUID') ?: project.findProperty('client_uuid') ?: '_MISSING_'
+			property 'minecraft.accessToken', System.getenv('CLIENT_TOKEN') ?: project.findProperty('client_token') ?: '_MISSING_'
+
 			property 'forge.enabledGameTestNamespaces', mod_id
 			property 'mixin.env.disableRefMap', 'true'
 			property 'forge.logging.markers', 'REGISTRIES'
@@ -78,24 +82,33 @@ dependencies {
 	// compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
 	// compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
 		
-	runtimeOnly fg.deobf("blank:jei-1.20.1-forge:15.20.0.112")
-	runtimeOnly fg.deobf("blank:Jade-1.20.1-Forge-11.13.2:11.13.2")
-	runtimeOnly fg.deobf("blank:architectury-9.2.14-forge:9.2.14")
-	runtimeOnly fg.deobf("blank:cupboard-1.20.1-2.7:2.7")
-	runtimeOnly fg.deobf("blank:constructionwand-1.20.1-2.11:2.11")
-	runtimeOnly fg.deobf("blank:fastboot-1.20.x-1.2:1.2")
-	runtimeOnly fg.deobf("blank:Fastload-Reforged-mc1.20.1-3.4.0:3.4.0")
-	runtimeOnly fg.deobf("blank:ParCool-1.20.1-3.4.2.0:3.4.2.0")
-	runtimeOnly fg.deobf("curse.maven:quickskin-1323980:7226544")
-	runtimeOnly fg.deobf("blank:PuzzlesLib-v8.1.33-1.20.1-Forge:8.1.33")
-	runtimeOnly fg.deobf("blank:embeddium-0.3.31+mc1.20.1:0.3.31")
-	runtimeOnly fg.deobf("blank:chloride-FORGE-mc1.20.1-v1.7.3:1.7.3")
-	runtimeOnly fg.deobf("blank:sodiumdynamiclights-forge-1.0.10-1.20.1:1.0.10")
-	runtimeOnly fg.deobf("blank:sodiumoptionsapi-forge-1.0.10-1.20.1:1.0.10")
-	runtimeOnly fg.deobf("blank:oculus-mc1.20.1-1.8.0:1.8.0")
-	runtimeOnly fg.deobf("blank:webdisplays-2.0.2-1.20.1:2.0.2")
-	runtimeOnly fg.deobf("blank:mcef-forge-2.1.6-1.20.1:2.1.6")
-		
+	runtimeOnly(fg.deobf("blank:jei-1.20.1-forge:15.20.0.112"))
+	runtimeOnly(fg.deobf("blank:Jade-1.20.1-Forge-11.13.2:11.13.2"))
+	runtimeOnly(fg.deobf("blank:architectury-9.2.14-forge:9.2.14"))
+	runtimeOnly(fg.deobf("blank:cupboard-1.20.1-2.7:2.7"))
+	runtimeOnly(fg.deobf("blank:constructionwand-1.20.1-2.11:2.11"))
+	runtimeOnly(fg.deobf("blank:fastboot-1.20.x-1.2:1.2"))
+	runtimeOnly(fg.deobf("blank:Fastload-Reforged-mc1.20.1-3.4.0:3.4.0"))
+	runtimeOnly(fg.deobf("blank:ParCool-1.20.1-3.4.2.0:3.4.2.0"))
+	runtimeOnly(fg.deobf("curse.maven:quickskin-1323980:7226544"))
+	runtimeOnly(fg.deobf("curse.maven:create-328085:7178761"))
+	runtimeOnly(fg.deobf("blank:PuzzlesLib-v8.1.33-1.20.1-Forge:8.1.33"))
+	runtimeOnly(fg.deobf("blank:embeddium-0.3.31+mc1.20.1:0.3.31"))
+	runtimeOnly(fg.deobf("blank:chloride-FORGE-mc1.20.1-v1.7.3:1.7.3"))
+	runtimeOnly(fg.deobf("blank:sodiumdynamiclights-forge-1.0.10-1.20.1:1.0.10"))
+	runtimeOnly(fg.deobf("blank:sodiumoptionsapi-forge-1.0.10-1.20.1:1.0.10"))
+	runtimeOnly(fg.deobf("blank:oculus-mc1.20.1-1.8.0:1.8.0"))
+	runtimeOnly(fg.deobf("blank:mcef-forge-2.1.6-1.20.1:2.1.6"))
+	
+	runtimeOnly(fg.deobf("curse.maven:webdisplays-654478:5823561"))
+	compileOnly(fg.deobf("curse.maven:webdisplays-654478:5823561"))
+
+	compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.2"))
+	implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.2")) {
+		jarJar.ranged(it, "[0.5.2,)")
+	}
+	
+	// runtimeOnly fg.deobf("blank:webdisplays-2.0.2-1.20.1:2.0.2")
 	// runtimeOnly fg.deobf("blank::")
 }
 

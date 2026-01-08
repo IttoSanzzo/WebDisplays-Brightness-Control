@@ -1,0 +1,39 @@
+{
+	"java.project.sourcePaths": [
+		"src/main/java"
+	],
+	"java.project.outputPath": "build/classes",
+	"java.project.referencedLibraries": [
+		"build/libs/**/*.jar",
+		"libs/**/*.jar"
+	],
+	"java.project.resourceFilters": [
+		"node_modules",
+		".git",
+		".gradle",
+		"run",
+		"logs",
+		"build"
+	],
+	"java.format.settings.url": ".vscode/java-formatter.xml",
+	"[java]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "redhat.java",
+		"editor.insertSpaces": false
+	},
+	"files.exclude": {
+		"**/.git": false,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		".git": true,
+		".gitignore": true,
+		".gitmodules": true,
+		".vscode": true,
+		"**/CVS": true,
+		"**/obj": true,
+		".gitattributes": true
+	},
+	"explorerExclude.backup": {}
+}
