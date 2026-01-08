@@ -128,8 +128,9 @@ dependencies {
 	runtimeOnly(fg.deobf("blank:sodiumdynamiclights-forge-1.0.10-1.20.1:1.0.10"))
 	runtimeOnly(fg.deobf("blank:sodiumoptionsapi-forge-1.0.10-1.20.1:1.0.10"))
 	runtimeOnly(fg.deobf("blank:oculus-mc1.20.1-1.8.0:1.8.0"))
-	runtimeOnly(fg.deobf("blank:mcef-forge-2.1.6-1.20.1:2.1.6"))
 	
+	runtimeOnly(fg.deobf("curse.maven:mcef-636236:5828187"))
+	compileOnly("curse.maven:mcef-636236:5828187")
 	runtimeOnly(fg.deobf("curse.maven:webdisplays-654478:5823561"))
 	compileOnly("curse.maven:webdisplays-654478:5823561")
 
@@ -140,6 +141,7 @@ dependencies {
 
 	annotationProcessor('org.spongepowered:mixin:0.8.5:processor')
 	
+	// runtimeOnly(fg.deobf("blank:mcef-forge-2.1.6-1.20.1:2.1.6"))
 	// runtimeOnly fg.deobf("blank:webdisplays-2.0.2-1.20.1:2.0.2")
 	// runtimeOnly fg.deobf("blank::")
 }
