@@ -49,10 +49,6 @@ minecraft {
 		}
 
 		client {
-			property 'minecraft.username', System.getenv('CLIENT_USER') ?: project.findProperty('client_user') ?: '_MISSING_'
-			property 'minecraft.uuid', System.getenv('CLIENT_UUID') ?: project.findProperty('client_uuid') ?: '_MISSING_'
-			property 'minecraft.accessToken', System.getenv('CLIENT_TOKEN') ?: project.findProperty('client_token') ?: '_MISSING_'
-
 			property 'forge.enabledGameTestNamespaces', mod_id
 			property 'mixin.env.disableRefMap', 'true'
 			property 'forge.logging.markers', 'REGISTRIES'
@@ -80,16 +76,12 @@ minecraft {
 sourceSets {
 	main {
 		resources { srcDir 'src/generated/resources' }
-		// ext.refMap = "webdisplays_brightness_control.refmap.json"
 	}
 }
 
 mixin {
 	add sourceSets.main, "mixins.webdisplays_brightness_control.refmap.json"
 	config "mixins.webdisplays_brightness_control.json"
-	// disableTargetExport
-	// disableTargetValidator
-	// defaultObfuscationEnv "notch"
 	debug.verbose = true
 	debug.export = true
 }
@@ -128,9 +120,8 @@ dependencies {
 	runtimeOnly(fg.deobf("blank:sodiumdynamiclights-forge-1.0.10-1.20.1:1.0.10"))
 	runtimeOnly(fg.deobf("blank:sodiumoptionsapi-forge-1.0.10-1.20.1:1.0.10"))
 	runtimeOnly(fg.deobf("blank:oculus-mc1.20.1-1.8.0:1.8.0"))
-	
 	runtimeOnly(fg.deobf("curse.maven:mcef-636236:5828187"))
-	compileOnly("curse.maven:mcef-636236:5828187")
+	
 	runtimeOnly(fg.deobf("curse.maven:webdisplays-654478:5823561"))
 	compileOnly("curse.maven:webdisplays-654478:5823561")
 
@@ -141,9 +132,6 @@ dependencies {
 
 	annotationProcessor('org.spongepowered:mixin:0.8.5:processor')
 	
-	// runtimeOnly(fg.deobf("blank:mcef-forge-2.1.6-1.20.1:2.1.6"))
-	// runtimeOnly fg.deobf("blank:webdisplays-2.0.2-1.20.1:2.0.2")
-	// runtimeOnly fg.deobf("blank::")
 }
 
 tasks.named('processResources', ProcessResources).configure {
