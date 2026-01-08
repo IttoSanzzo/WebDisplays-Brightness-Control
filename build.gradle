@@ -1,9 +1,24 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {
+			url = 'https://repo.spongepowered.org/maven'
+		}
+	}
+	dependencies {
+		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+	}
+}
+
 plugins {
 	id 'eclipse'
 	id 'idea'
 	id 'maven-publish'
 	id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+	id 'org.spongepowered.mixin' version '0.7.+'
 }
+
+apply plugin: 'org.spongepowered.mixin'
 
 version = "${mod_version}"
 group = "${mod_group}.${mod_id}"
@@ -62,7 +77,22 @@ minecraft {
 	}
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets {
+	main {
+		resources { srcDir 'src/generated/resources' }
+		// ext.refMap = "webdisplays_brightness_control.refmap.json"
+	}
+}
+
+mixin {
+	add sourceSets.main, "mixins.webdisplays_brightness_control.refmap.json"
+	config "mixins.webdisplays_brightness_control.json"
+	// disableTargetExport
+	// disableTargetValidator
+	// defaultObfuscationEnv "notch"
+	debug.verbose = true
+	debug.export = true
+}
 
 repositories {
 	flatDir {
@@ -107,6 +137,8 @@ dependencies {
 	implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.2")) {
 		jarJar.ranged(it, "[0.5.2,)")
 	}
+
+	annotationProcessor('org.spongepowered:mixin:0.8.5:processor')
 	
 	// runtimeOnly fg.deobf("blank:webdisplays-2.0.2-1.20.1:2.0.2")
 	// runtimeOnly fg.deobf("blank::")
