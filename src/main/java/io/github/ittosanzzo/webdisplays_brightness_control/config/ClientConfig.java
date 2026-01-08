@@ -13,9 +13,8 @@ public class ClientConfig {
 	public static final ForgeConfigSpec.DoubleValue Brightness;
 
 	static {
-		Brightness = Builder.comment(
-			"Defines the bright level for WebDisplays in percent (0 = 0%, 0.5 = 50%, 1 = 100%)"
-		).defineInRange("brightness", 0.5, 0.0, 1.0);
+		Brightness = Builder.comment("Defines the bright level for WebDisplays in percent (0 = 0%, 0.5 = 50%, 1 = 100%)")
+				.defineInRange("brightness", 0.55, 0.0, 1.0);
 
 		Spec = Builder.build();
 	}

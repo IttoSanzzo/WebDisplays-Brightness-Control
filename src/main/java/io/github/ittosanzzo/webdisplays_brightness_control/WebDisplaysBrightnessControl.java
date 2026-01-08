@@ -18,7 +18,7 @@ public class WebDisplaysBrightnessControl {
 
 	public WebDisplaysBrightnessControl(FMLJavaModLoadingContext context) {
 		ModConfigs.Register(context);
-		Logger.info("[WDBC]: Main Started");
+		// Logger.info("[WDBC]: Main Started");
 	}
 
 	@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -26,7 +26,7 @@ public class WebDisplaysBrightnessControl {
 
 		@SubscribeEvent
 		public static void onClientSetup(FMLClientSetupEvent event) {
-			Logger.info("HELLO FROM CLIENT SETUP");
+			// Logger.info("HELLO FROM CLIENT SETUP");
 		}
 	}
 }
