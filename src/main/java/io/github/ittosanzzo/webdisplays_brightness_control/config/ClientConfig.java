@@ -11,10 +11,14 @@ public class ClientConfig {
 	public static final ForgeConfigSpec Spec;
 
 	public static final ForgeConfigSpec.DoubleValue Brightness;
+	public static final ForgeConfigSpec.DoubleValue MinePadBrightness;
 
 	static {
 		Brightness = Builder.comment("Defines the bright level for WebDisplays in percent (0 = 0%, 0.5 = 50%, 1 = 100%)")
 				.defineInRange("brightness", 0.55, 0.0, 1.0);
+		MinePadBrightness = Builder
+				.comment("Defines the bright level for MinePads in percent (0 = 0%, 0.5 = 50%, 1 = 100%)")
+				.defineInRange("minepad_brightness", 0.55, 0.0, 1.0);
 
 		Spec = Builder.build();
 	}
